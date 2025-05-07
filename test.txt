@@ -1,0 +1,79 @@
+(.venv) evgenijasakov@MacBook-Air-Evgenij lms-django %
+python manage.py test materials
+
+Found 3 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+EEE
+======================================================================
+ERROR: test_create_lesson (materials.tests.LessonCrudTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/evgenijasakov/lms-django/materials/tests.py", line 11, in setUp
+    self.user = User.objects.create_user(email='user@example.com', password='pass')
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+
+======================================================================
+ERROR: test_create_lesson_invalid_url (materials.tests.LessonCrudTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/evgenijasakov/lms-django/materials/tests.py", line 11, in setUp
+    self.user = User.objects.create_user(email='user@example.com', password='pass')
+TypeError: UserManager.create_user() missing 1 required positional argument: 'username'
+
+======================================================================
+ERROR: test_subscribe_unsubscribe (materials.tests.SubscriptionTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+sqlite3.OperationalError: table users_user has no column named username
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/evgenijasakov/lms-django/materials/tests.py", line 28, in setUp
+    self.user = User.objects.create_user(username='user', password='pass')
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/contrib/auth/models.py", line 175, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/contrib/auth/models.py", line 163, in _create_user
+    user.save(using=self._db)
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/contrib/auth/base_user.py", line 65, in save
+    super().save(*args, **kwargs)
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/models/query.py", line 1854, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1881, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/evgenijasakov/lms-django/.venv/lib/python3.10/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+django.db.utils.OperationalError: table users_user has no column named username
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.149s
+
+FAILED (errors=3)
+Destroying test database for alias 'default'...
+(.venv) evgenijasakov@MacBook-Air-Evgenij lms-django %
+
