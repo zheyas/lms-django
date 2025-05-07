@@ -1,19 +1,21 @@
 from django.db import models
+from users.models import User
 
 class Course(models.Model):
-    name = models.CharField(max_length=200)
-    preview = models.ImageField(upload_to='courses/', blank=True, null=True)
-    description = models.TextField(blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='courses')
+    title = models.CharField(max_length=128)
+    preview = models.ImageField(upload_to='courses/previews/')
+    description = models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.title
 
 class Lesson(models.Model):
-    course = models.ForeignKey(Course, related_name='lessons', on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    preview = models.ImageField(upload_to='lessons/', blank=True, null=True)
-    video_url = models.URLField(blank=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lessons')
+    title = models.CharField(max_length=128)
+    description = models.TextField()
+    preview = models.ImageField(upload_to='lessons/previews/')
+    video_link = models.URLField()
 
     def __str__(self):
-        return self.name
+        return self.title
