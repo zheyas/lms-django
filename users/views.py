@@ -1,25 +1,34 @@
-from rest_framework import generics, filters
-
 from django_filters.rest_framework import DjangoFilterBackend
-from .serializers import PaymentSerializer  # <--- ваш путь до сериализатора
+from rest_framework import filters, generics
+
 from .models import Payment
+from .serializers import PaymentSerializer  # <--- ваш путь до сериализатора
+
 
 class PaymentListView(generics.ListAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ['course', 'lesson', 'method']
-    ordering_fields = ['date']
-    ordering = ['-date']
+    filterset_fields = ["course", "lesson", "method"]
+    ordering_fields = ["date"]
+    ordering = ["-date"]
 
-from rest_framework import generics, viewsets, permissions
+
+from rest_framework import generics, permissions, viewsets
+
 from .models import User
-from .serializers import UserRegisterSerializer, UserProfileSerializer, UserPublicSerializer
+from .serializers import (
+    UserProfileSerializer,
+    UserPublicSerializer,
+    UserRegisterSerializer,
+)
+
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserRegisterSerializer
     permission_classes = [permissions.AllowAny]
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -29,7 +38,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == "retrieve":
             # Если пользователь смотрит чужой профиль
-            if self.kwargs['pk'] and int(self.kwargs['pk']) != self.request.user.pk:
+            if self.kwargs["pk"] and int(self.kwargs["pk"]) != self.request.user.pk:
                 return UserPublicSerializer
         return UserProfileSerializer
 
