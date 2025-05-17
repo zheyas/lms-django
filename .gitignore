@@ -9,3 +9,5 @@ media/
 .venv
 .venv/
 __pycache__
+venv/
+.venv/
