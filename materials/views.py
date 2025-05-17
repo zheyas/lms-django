@@ -1,11 +1,48 @@
 from rest_framework import viewsets, generics
 from .models import Lesson
 from .serializers import CourseSerializer, LessonSerializer
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
-from .models import Course, Subscription
+from .models import Subscription
+import stripe
+from django.conf import settings
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+from .models import Course
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+class BuyCourseAPIView(APIView):
+    def post(self, request, course_id):
+        try:
+            course = Course.objects.get(pk=course_id)
+        except Course.DoesNotExist:
+            return Response({"error": "Course not found."}, status=404)
+
+        # 1. Создать продукт (если нужно, можно сохранить stripe_product_id в модели курса)
+        product = stripe.Product.create(name=course.name)
+
+        # 2. Создать цену для продукта (например, 10 usd)
+        price = stripe.Price.create(
+            product=product.id,
+            unit_amount=1000,  # цена в центах, т.е. $10.00
+            currency="usd",
+        )
+
+        # 3. Создать checkout-сессию
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price': price.id,
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url='http://127.0.0.1:8000/success/', # < URL успеха
+            cancel_url='http://127.0.0.1:8000/cancel/',   # <и отмены>
+        )
+
+        return Response({'checkout_url': session.url})
+
 
 class SubscribeAPIView(APIView):
     permission_classes = [IsAuthenticated]
