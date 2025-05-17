@@ -1,0 +1,66 @@
+(.venv) evgenijasakov@MacBook-Air-Evgenij lms-django-mirror % git grep -F 'sk_test_'
+
+fatal: this operation must be run in a work tree
+(.venv) evgenijasakov@MacBook-Air-Evgenij lms-django-mirror % git rev-list --all | xargs git grep -F 'sk_test_'
+
+Binary file 6e3ceb83344fc92a5c8e53879303983c946dd926:venv/lib/python3.10/site-packages/PIL/.dylibs/libfreetype.6.dylib matches
+Binary file d42837a53a96eb7e7878734e398f4c3e33c4902c:venv/lib/python3.10/site-packages/PIL/.dylibs/libfreetype.6.dylib matches
+Binary file ae604dd376a11d12a4dfe1012371301d6aedeeaf:venv/lib/python3.10/site-packages/PIL/.dylibs/libfreetype.6.dylib matches
+Binary file 15e5832b4a17ad577f4e2ee4d8bec3168c0da5f7:venv/lib/python3.10/site-packages/PIL/.dylibs/libfreetype.6.dylib matches
+Binary file 43d5b40bcc61ea253bcbe3f007bcad53df7dc0df:venv/lib/python3.10/site-packages/PIL/.dylibs/libfreetype.6.dylib matches
+Binary file 12afb12cd01dd0d9d160cf213cfaee4edcb60059:venv/lib/python3.10/site-packages/PIL/.dylibs/libfreetype.6.dylib matches
+Binary file e34ff2aa00f07b3b0e03e6550f5c8dbbca54f69f:venv/lib/python3.10/site-packages/PIL/.dylibs/libfreetype.6.dylib matches
+Binary file 6efd1418bbd983b394164d16e12edae3b6caab7e:venv/lib/python3.10/site-packages/PIL/.dylibs/libfreetype.6.dylib matches
+Binary file b92d85198f3c836cf7fa83ca753f8afbd6c68f53:venv/lib/python3.10/site-packages/PIL/.dylibs/libfreetype.6.dylib matches
+Binary file c457258522a56e2cf4e59cc56a068aee8672fa48:venv/lib/python3.10/site-packages/PIL/.dylibs/libfreetype.6.dylib matches
+(.venv) evgenijasakov@MacBook-Air-Evgenij lms-django-mirror % git for-each-ref --format='%(refname)' refs/pull/ | xargs -n 1 git update-ref -d
+
+(.venv) evgenijasakov@MacBook-Air-Evgenij lms-django-mirror % bfg --replace-text .bfg-replacements.txt .
+
+
+Using repo : /Users/evgenijasakov/lms-django/lms-django-mirror/lms-django-mirror/.
+
+Found 57 objects to protect
+Found 6 commit-pointing refs : HEAD, refs/heads/d0, refs/heads/dev0, ...
+
+Protected commits
+-----------------
+
+These are your protected commits, and so their contents will NOT be altered:
+
+ * commit c0268579 (protected by 'HEAD')
+
+Cleaning
+--------
+
+Found 12 commits
+Cleaning commits:       100% (12/12)
+Cleaning commits completed in 529 ms.
+
+BFG aborting: No refs to update - no dirty commits found??
+
+(.venv) evgenijasakov@MacBook-Air-Evgenij lms-django-mirror % git reflog expire --expire=now --all && git gc --prune=now --aggressive
+
+Перечисление объектов: 9621, готово.
+Подсчет объектов: 100% (9621/9621), готово.
+При сжатии изменений используется до 8 потоков
+Сжатие объектов: 100% (8375/8375), готово.
+Запись объектов: 100% (9621/9621), готово.
+Building bitmaps: 100% (12/12), готово.
+Total 9621 (delta 2656), reused 6962 (delta 0), pack-reused 0 (from 0)
+(.venv) evgenijasakov@MacBook-Air-Evgenij lms-django-mirror % git push --mirror --force
+
+
+
+ssh: connect to host github.com port 22: Undefined error: 0
+fatal: Не удалось прочитать из внешнего репозитория.
+
+Удостоверьтесь, что у вас есть необходимые права доступа
+и репозиторий существует.
+(.venv) evgenijasakov@MacBook-Air-Evgenij lms-django-mirror %
+(.venv) evgenijasakov@MacBook-Air-Evgenij lms-django-mirror %
+(.venv) evgenijasakov@MacBook-Air-Evgenij lms-django-mirror % git push --mirror --force
+
+Everything up-to-date
+(.venv) evgenijasakov@MacBook-Air-Evgenij lms-django-mirror %
+
