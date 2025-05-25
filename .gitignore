@@ -5,5 +5,9 @@ db.sqlite3
 *.env
 media/
 .idea
+.idea/
 .venv
+.venv/
 __pycache__
+venv/
+.venv/
