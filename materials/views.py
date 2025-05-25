@@ -8,9 +8,17 @@ import stripe
 from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
 from .models import Course
 stripe.api_key = settings.STRIPE_SECRET_KEY
+from rest_framework import generics
+from .models import Lesson
+from .serializers import LessonSerializer
+from .permissions import LessonCoursePermission
+
+class LessonDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+    permission_classes = [LessonCoursePermission]
 
 class BuyCourseAPIView(APIView):
     def post(self, request, course_id):
