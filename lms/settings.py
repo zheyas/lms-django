@@ -14,6 +14,8 @@ ALLOWED_HOSTS = []
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'rest_framework_simplejwt',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
