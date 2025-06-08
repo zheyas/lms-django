@@ -1,9 +1,8 @@
-
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import Lesson, Course, Subscription
 from .serializers import LessonSerializer, CourseSerializer
-from .permissions import LessonCoursePermission
+from materials.permissions import LessonCoursePermission
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -15,7 +14,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
-    permission_classes = [IsAuthenticated]  # если нужна авторизация на курсы
+    permission_classes = [IsAuthenticated, LessonCoursePermission]
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
