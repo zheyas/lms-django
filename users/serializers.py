@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User
+
+from users.models import User  # а не from django.contrib.auth.models import User
 from rest_framework import serializers
 
 class UserRegisterSerializer(serializers.ModelSerializer):
