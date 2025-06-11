@@ -1,8 +1,9 @@
+#materials/views.py
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import Lesson, Course, Subscription
 from .serializers import LessonSerializer, CourseSerializer
-from materials.permissions import LessonCoursePermission
+from materials.permission import LessonCoursePermission
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404

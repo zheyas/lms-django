@@ -1,3 +1,4 @@
+#settings.py
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -14,21 +15,19 @@ ALLOWED_HOSTS = []
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'rest_framework_simplejwt',
-
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
+    'django.contrib.auth',                # Оставлено только один раз
+    'django.contrib.contenttypes',        # Оставлено только один раз
     'django.contrib.sessions',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework.authtoken',
     'users',
     'materials',
-    'django_celery_beat',       # celery periodic
+    'django_celery_beat',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
